@@ -1,4 +1,4 @@
-let database = require("../database");
+const database = require("../database");
 
 let authController = {
   login: (req, res) => {
@@ -9,12 +9,23 @@ let authController = {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res) => {
-    // implement
+  getUserByEmailIdAndPassword: (email, password) => {
+    for (let emailInDatabase in database) {
+      if (email === emailInDatabase) {
+        return database[email]
+      }
+    }
+    return null;
   },
 
-  registerSubmit: (req, res) => {
-    // implement
+  getUserById: (idFromSession) => {
+    for (let emailInDatabase in database) {
+      let dataAboutUser = database[emailInDatabase];
+      if(dataAboutUser.id == idFromSession) {
+        return dataAboutUser;
+      }
+    }
+    return null;
   },
 };
 
