@@ -80,7 +80,7 @@ let remindersController = {
     if(currentUser.userIcon){
       next(); 
     } else {  
-      data = axios.get(`https://api.unsplash.com/photos/random?client_id=${process.env.ACCESS_KEY}`)
+      data = axios.get(`https://api.unsplash.com/photos/random?client_id=sc756lLw9chQreHz5Ro16aADdsUKdwATI__ju9iqW9I`)
         .then(function (response) {
           currentUser.userIcon = response.data.urls.thumb;
           next();
