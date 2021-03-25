@@ -53,6 +53,15 @@ header.masthead h1 {
   }
 }
 
+.icon {
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  margin: 10px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
 .showcase .showcase-text {
   padding: 3rem;
 }

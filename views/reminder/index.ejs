@@ -1,7 +1,12 @@
 <div class="container">
   <h1 class="page-header">Reminders</h1>
 
-  <h1><%= currentUser.firstName %></h1>
+  <img 
+    class="icon"
+    src=<%= currentUser.userIcon %>
+    alt="user icon image"
+  />
+  <h1 style="display: inline-block"><%= currentUser.firstName %></h1>
 <ul class="list-group">
   <% reminders.forEach(function (reminderItem) { %>
     <li class="list-group-item">
@@ -17,5 +22,7 @@
     </li>
   <% }) %>
 </ul>
-
+<script>
+  console.log(`src: ${currentUser.userIcon.image}, alt: ${currentUser.userIcon.altText}`)
+</script>
 </div>

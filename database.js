@@ -3,6 +3,7 @@ let database = {
     "cindy@mail.com": {
         id: "1",
         firstName: "Cindy",
+        userIcon: '',
         reminders: [
             {
                 id: 1, 
@@ -16,6 +17,7 @@ let database = {
     "alex@mail.com": {
         id: "2",
         firstName: "alex",
+        userIcon: '',
         reminders: []
     } 
 }

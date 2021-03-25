@@ -39,7 +39,8 @@ function isLoggedIn(req, res, next){
   }
 }
 
-app.get("/reminders", isLoggedIn, reminderController.list);
+// get /reminders, check if user is logged in, check if user has an icon, grab reminders & render reminders index page
+app.get("/reminders", isLoggedIn, reminderController.getIcon, reminderController.list);
 
 app.get("/reminder/new", isLoggedIn, reminderController.new);
 

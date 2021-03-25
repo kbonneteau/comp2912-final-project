@@ -1,9 +1,11 @@
 let database = require("../database");
+const axios = require('axios');
+require('dotenv').config();
 
 let remindersController = {
   list: (req, res) => {
     const currentUser = req.user;
-    res.render("reminder/index", { reminders: currentUser.reminders, currentUser: currentUser });
+    res.render("reminder/index", { reminders: currentUser.reminders, userIcon: currentUser.userIcon, currentUser: currentUser });
   },
 
   new: (req, res) => {
@@ -71,6 +73,23 @@ let remindersController = {
     currentUser.reminders.splice(searchResult, 1);
     res.redirect("/reminders");
   },
+
+  // Unsplash API implementation: ping Unsplash for an icon if the user does not have one
+  getIcon: (req, res, next) => {
+    const currentUser = req.user;
+    if(currentUser.userIcon){
+      next(); 
+    } else {  
+      data = axios.get(`https://api.unsplash.com/photos/random?client_id=${process.env.ACCESS_KEY}`)
+        .then(function (response) {
+          currentUser.userIcon = response.data.urls.thumb;
+          next();
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+    }
+  }
 };
 
 module.exports = remindersController;
