@@ -47,11 +47,12 @@ let remindersController = {
 
   update: (req, res) => {
     // implement this code
+    const currentUser = req.user;
     let reminderToFind = req.params.id;
-    let searchResult = database.cindy.reminders.find(function (reminder) {
+    let searchResult = currentUser.reminders.find(function (reminder) {
       return reminder.id == reminderToFind;
     });
-    database.cindy.reminders.splice(searchResult, 1, {
+    currentUser.reminders.splice(searchResult, 1, {
       id: searchResult.id,
       title: req.body.title,
       description: req.body.description,
@@ -62,11 +63,12 @@ let remindersController = {
 
   delete: (req, res) => {
     // Implement this code
+    const currentUser = req.user;
     let reminderToFind = req.params.id;
-    let searchResult = database.cindy.reminders.find(function (reminder) {
+    let searchResult = currentUser.reminders.find(function (reminder) {
       return reminder.id == reminderToFind;
     });
-    database.cindy.reminders.splice(searchResult, 1);
+    currentUser.reminders.splice(searchResult, 1);
     res.redirect("/reminders");
   },
 };
