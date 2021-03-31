@@ -4,7 +4,7 @@ require('dotenv').config();
 
 let remindersController = {
   list: (req, res) => {
-    const currentUser = req.user;
+    const currentUser = req.user;  
     res.render("reminder/index", { reminders: currentUser.reminders, userIcon: currentUser.userIcon, currentUser: currentUser });
   },
 
@@ -21,7 +21,7 @@ let remindersController = {
     if (searchResult != undefined) {
       res.render("reminder/single-reminder", { reminderItem: searchResult });
     } else {
-      res.render("reminder/index", { reminders: currentUser.reminders });
+      res.render("reminder/index", { reminders: currentUser.reminders, currentUser: currentUser });
     }
   },
 
@@ -86,9 +86,43 @@ let remindersController = {
           next();
         })
         .catch(function (error) {
-        console.log(error);
+          console.log(error);
         });
     }
+  },
+
+  getUsers: (req, res) => {
+    const currentUser = req.user;
+    let userFriends = currentUser.friends;
+    let friends = [];
+    let nonFriends = [];
+    // assign all database items to an array
+    let allUsers = Object.values(database);
+    // loop through each user to identify if they are a friend. Add to applicable array.
+    allUsers.forEach(user => {
+      if(userFriends.includes(user.id)) {
+        friends.push(user);
+        // return console.log(friends[0].firstName);
+      } else if (currentUser.id === user.id){
+        return;
+      } else {
+        nonFriends.push(user);
+        // return console.log(nonFriends[0].firstName);
+      }
+    });
+    
+    res.render("reminder/friends", { 
+      currentUser: currentUser, 
+      friends: friends, 
+      nonFriends: nonFriends 
+    });
+  },
+
+  addFriend: (req, res) => {
+    const currentUser = req.user;
+    let newFriend = { id: req.body.friend };
+    currentUser.friends.push(newFriend.id);
+    res.redirect("/reminder/people");
   }
 };
 

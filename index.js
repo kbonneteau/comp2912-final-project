@@ -39,6 +39,12 @@ function isLoggedIn(req, res, next){
   }
 }
 
+// New SOCIAL case: user wants to look at a list of other users and add a friend
+
+app.get("/reminder/people", isLoggedIn, reminderController.getUsers);
+
+app.post("/reminder/friends", isLoggedIn, reminderController.addFriend)
+
 // get /reminders, check if user is logged in, check if user has an icon, grab reminders & render reminders index page
 app.get("/reminders", isLoggedIn, reminderController.getIcon, reminderController.list);
 

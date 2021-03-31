@@ -1,0 +1,41 @@
+<div class="container">
+    <h1 class="page-header"><%= currentUser.firstName %>'s Friends</h1>
+    <section class="list-group">
+        <h3>Friends' Reminders</h3>
+        <ul class="list-group">
+        <% friends.forEach(function (friend) { %>
+            <li class="list-group-item">
+            <strong><%= friend.firstName %> </strong>
+            <ul class="list-group">
+                <% friend.reminders.forEach(function (reminderItem) { %>
+                <li class="list-group-item">
+                    <strong><%= reminderItem.title %>: </strong>
+                    <%= reminderItem.description %>
+                    || Completed:
+                    <% if (reminderItem.completed == true) { %>
+                    <span class="badge badge-success">True</span>
+                    <% } else if (reminderItem.completed == false) { %>
+                    <span class="badge badge-danger">False</span>
+                    <% } %>
+                </li>
+                <% }) %>
+            </ul>
+            </li>
+            <% }) %>
+        </ul>
+    
+        <h3>Other Users</h3>
+        <ul class="list-group">
+        <% nonFriends.forEach(function (nonFriend) { %>
+            <li class="list-group-item">
+            <p><strong><%= nonFriend.firstName %> </strong></p>
+            <form action="/reminder/friends" method="POST">
+                <input style="display: none" type="text" name="friend" value="<%= nonFriend.id %>">
+                <button type="submit" id="add-friend" class="btn-primary">Add Friend</button>
+            </form>
+            </li>
+            <% }) %>
+        </ul>
+    </section>
+</div>
+  

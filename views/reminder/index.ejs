@@ -1,28 +1,27 @@
 <div class="container">
   <h1 class="page-header">Reminders</h1>
-
+  <!-- API Implementation -->
   <img 
     class="icon"
     src=<%= currentUser.userIcon %>
     alt="user icon image"
   />
-  <h1 style="display: inline-block"><%= currentUser.firstName %></h1>
-<ul class="list-group">
-  <% reminders.forEach(function (reminderItem) { %>
-    <li class="list-group-item">
-      <strong><%= reminderItem.title %>: </strong>
-      <%= reminderItem.description %>
-      || Completed:
-      <% if (reminderItem.completed == true) { %>
-        <span class="badge badge-success">True</span>
-      <% } else if (reminderItem.completed == false) { %>
-        <span class="badge badge-danger">False</span>
-      <% } %>
-      <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
-    </li>
-  <% }) %>
-</ul>
-<script>
-  console.log(`src: ${currentUser.userIcon.image}, alt: ${currentUser.userIcon.altText}`)
-</script>
+  <h2 style="display: inline-block"><%= currentUser.firstName %></h2>
+
+  <h2>Reminders List</h2>
+  <ul class="list-group">
+    <% reminders.forEach(function (reminderItem) { %>
+      <li class="list-group-item">
+        <strong><%= reminderItem.title %>: </strong>
+        <%= reminderItem.description %>
+        || Completed:
+        <% if (reminderItem.completed == true) { %>
+          <span class="badge badge-success">True</span>
+        <% } else if (reminderItem.completed == false) { %>
+          <span class="badge badge-danger">False</span>
+        <% } %>
+        <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
+      </li>
+    <% }) %>
+  </ul>
 </div>
