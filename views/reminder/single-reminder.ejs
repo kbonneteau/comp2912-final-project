@@ -10,9 +10,19 @@
             <span class="label label-success">True</span>
           <% } else if (reminderItem.completed == false) { %>
             <span class="label label-danger">False</span>
-          <% } %>
+            <br />
+            <p style="display: inline">Tags: </p>
+            <% reminderItem.tags.forEach(tag => { %>
+              <span class="tag"><%= tag %></span> 
+            <% }) %> 
         </h4>
-
+        <h4>Sub tasks</h4>
+        <ul>
+        <% reminderItem.tasks.forEach(task => { %>
+          <li><%= task %></li> 
+        <% }) %> 
+        </ul>
+        <% } %>
         <a class="btn btn-warning" href=<%= "/reminder/" + reminderItem.id + "/edit" %>>Edit</a>
 
         <form class="deleteForm "method="POST" action=<%= "/reminder/delete/" + reminderItem.id %>>

@@ -20,6 +20,12 @@
         <% } else if (reminderItem.completed == false) { %>
           <span class="badge badge-danger">False</span>
         <% } %>
+        <br />
+        <p style="display: inline">Tags: </p>
+        <% reminderItem.tags.forEach(tag => { %>
+          <span class="tag"><%= tag %></span> 
+        <% }) %> 
+        <br />
         <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
       </li>
     <% }) %>
