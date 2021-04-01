@@ -156,13 +156,3 @@ footer.footer {
 #add-friend {
   border-radius: 15px;
 }
-
-.tag {
-  border-radius: 25px;
-  color: white;
-  background-color: #FF6F6F;
-  text-align: center;
-  vertical-align: middle;
-  font-size: small;
-  padding: 5px;
-}

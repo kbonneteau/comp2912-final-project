@@ -4,7 +4,7 @@ require('dotenv').config();
 
 let remindersController = {
   list: (req, res) => {
-    const currentUser = req.user;
+    const currentUser = req.user;  
     res.render("reminder/index", { reminders: currentUser.reminders, userIcon: currentUser.userIcon, currentUser: currentUser });
   },
 
@@ -102,10 +102,12 @@ let remindersController = {
     allUsers.forEach(user => {
       if(userFriends.includes(user.id)) {
         friends.push(user);
+        // return console.log(friends[0].firstName);
       } else if (currentUser.id === user.id){
         return;
       } else {
         nonFriends.push(user);
+        // return console.log(nonFriends[0].firstName);
       }
     });
     
